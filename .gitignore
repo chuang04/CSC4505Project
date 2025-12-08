@@ -1,1 +1,44 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
 dataset/
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+*.csv
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.dylib
+*.dll
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# PyTorch / ML model weights
+*.pth
+*.pt
+trial_weights/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Notebook checkpoints moved to trial_weights
+trial_weights/.ipynb_checkpoints/
