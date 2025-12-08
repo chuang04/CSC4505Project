@@ -12,7 +12,7 @@ We encounter challenges such as overfitting and low F1 scores. To address these,
 Despite these efforts, overfitting remains a challenge on this dataset.
 
 ## Code Structure:
-
+```
 ├── src/
 │   ├── explore_dataset.py     # Dataset visualization and EDA
 │   ├── train.py               # Training script
@@ -25,7 +25,7 @@ Despite these efforts, overfitting remains a challenge on this dataset.
 ├── trial_weights/             # Weights saved during trials on Jupyter notebook
 ├── README.md
 └── requirements.txt
-
+```
 Reproducibility: The repository includes requirements.txt. Instructions in this README allow full end-to-end reproduction.
 
 ## Dataset:
@@ -159,5 +159,6 @@ The ROC-AUC measuring the ability to rank postivie samples higher than negative 
 
 ## Technical Notes / Lessons Learned
 Overfitting remains a major challenge due to the small number of slides relative to the dataset size. This leads to common tropes being learned in a slide and then over fitting on it. ConvNeXt Tiny performed slightly better than ResNet18/50 and performed just as well after adding various ways to reduce overfitting. While the final iteration provided a F1 score of around ___ which is about the same as ResNet18/50, when ran without certain features, ResNet18/50 overfitted more than ConvNeXt Tiny did. Experimenting with dropout and freezing/unfreezing layers helped reduce the overall overfitting issue, but further data augmentation or regularization may be needed. 
+
 
 
