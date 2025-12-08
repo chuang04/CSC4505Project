@@ -5,6 +5,7 @@ __pycache__/
 *.pyd
 *.pyc
 dataset/
+dataset/HMU-GC-Clinical.csv
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 *.ipynb_checkpoints
