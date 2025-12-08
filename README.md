@@ -90,6 +90,7 @@ We experimented with several convolutional neural network (CNN) architectures to
 - A simple CNN with 3 convolutional layers, ReLU activations, max pooling, and fully connected layers.
 - Performance: Train/Validation Loss: 1.15 / 1.32, Accuracy: 0.57 / 0.49, F1 Score: 0.4582
 - Reason: Easy to implement and interpret; serves as a baseline to compare more complex models.
+<img width="843" height="585" alt="image" src="https://github.com/user-attachments/assets/2abd0c3f-02a3-495a-879a-6a0915b24c2e" />
 
 #### ResNet18 / ResNet50
 - Residual Networks (ResNets) use residual connections H(x)=F(x)+x to allow gradients to flow more easily during training, mitigating the vanishing gradient problem in deep networks.
@@ -102,8 +103,22 @@ We experimented with several convolutional neural network (CNN) architectures to
 
 **Reason:** Widely used CNNs that enable deeper models without degradation; good for benchmarking.
 
+##### Unused Tests: 
+**ResNet18 Base: F1 = 0.6046**
+<img width="843" height="585" alt="image" src="https://github.com/user-attachments/assets/496d6895-6f09-4b7c-bd86-36a8f051596f" />
+
+**ResNet18 w/ Custom Layers: F1 = 0.7009 | Big Overfitting 0.99 train accuracy**
+<img width="843" height="585" alt="image" src="https://github.com/user-attachments/assets/25ccfdb4-21af-47e1-9637-6290c7a4c0c5" />
+
+**ResNet50: F1 = 0.6362**
+<img width="843" height="585" alt="image" src="https://github.com/user-attachments/assets/f8fc0c47-2a0d-482d-acfd-58e84b834456" />
+
 #### ConvNeXt Tiny
-- Modern CNN inspired by Vision Transformers, combining CNN efficiency with transformer-like design choices. ConvNeXt utilizes key components of transformers such as layer normalization instead of batch normalization, large patch sizes instead of smaller kernels and simple feed-forward blocks instead of CNN bottle necks, making it scalable. Furthermore instead of bottlenecking, it expands first and then compresses. All of this benefits medical imaging because of the expanding nature, leading to more power and detection of subtle differences and abnormalities. Furthermore, ConvNeXt that is pretrained on sets like ImageNet allow it for fine tuned tasks in medical imaging. 
+- Modern CNN inspired by Vision Transformers, combining CNN efficiency with transformer-like design choices. ConvNeXt utilizes key components of transformers such as layer normalization instead of batch normalization, large patch sizes instead of smaller kernels and simple feed-forward blocks instead of CNN bottle necks, making it scalable. Furthermore instead of bottlenecking, it expands first and then compresses. All of this benefits medical imaging because of the expanding nature, leading to more power and detection of subtle differences and abnormalities. Furthermore, ConvNeXt that is pretrained on sets like ImageNet allow it for fine tuned tasks in medical imaging.
+
+##### Unused Tests: 
+**ConvNeXt: F1 = 0.7304 | Big Overfitting 0.98 train accuracy | Took very long time to run**
+<img width="843" height="585" alt="image" src="https://github.com/user-attachments/assets/6145cf37-abae-46d1-b502-e80cc753d634" />
 
 ##### Architecture:
 - Stem: 4×4 convolution (stride 4) to reduce resolution
@@ -161,6 +176,7 @@ This model that we landed on still had overfitting after attempting various tech
 
 ## Technical Notes / Lessons Learned
 Overfitting remains a major challenge due to the small number of slides relative to the dataset size. This leads to common tropes being learned in a slide and then over fitting on it. ConvNeXt Tiny performed slightly better than ResNet18/50 and performed just as well after adding various ways to reduce overfitting. While the final iteration provided a F1 score of around ___ which is about the same as ResNet18/50, when ran without certain features, ResNet18/50 overfitted more than ConvNeXt Tiny did. Experimenting with dropout and freezing/unfreezing layers helped reduce the overall overfitting issue, but further data augmentation or regularization may be needed. 
+
 
 
 
