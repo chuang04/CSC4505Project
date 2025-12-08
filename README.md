@@ -54,8 +54,9 @@ The dataset is not uploaded due to size. Instructions for downloading and prepar
 
 ## Exploratory Data Analysis (EDA)
 Class distibution was visualized to ensure balance and sample images per class were shown using explore_dataset.py. There were no missing files or corrupted files detected. 
-*insert image of split*
-*insert image of examples*
+<img width="1000" height="500" alt="Class Distribution" src="https://github.com/user-attachments/assets/6e379c83-32b8-4e7c-8d81-e6ca988ac38f" />
+<img width="1280" height="692" alt="Samples" src="https://github.com/user-attachments/assets/c2e68b86-fc33-4c39-ba31-683c8572a683" />
+
 
 ## Model Development
 ### Architecture Selection
@@ -85,8 +86,7 @@ Class distibution was visualized to ensure balance and sample images per class w
 
 ### Model Choices
 We experimented with several convolutional neural network (CNN) architectures to classify gastric cancer histopathology images into 8 tissue classes.
-
-1. Baseline CNN
+#### Baseline CNN
 
 A simple CNN with 3 convolutional layers, ReLU activations, max pooling, and fully connected layers.
 
@@ -94,7 +94,7 @@ Performance: Train/Validation Loss: 1.15 / 1.32, Accuracy: 0.57 / 0.49, F1 Score
 
 Reason: Easy to implement and interpret; serves as a baseline to compare more complex models.
 
-2. ResNet18 / ResNet50
+#### ResNet18 / ResNet50
 
 Residual Networks (ResNets) use residual connections H(x)=F(x)+x to allow gradients to flow more easily during training, mitigating the vanishing gradient problem in deep networks.
 
@@ -104,7 +104,7 @@ Performance: Improved over baseline; adding custom layers increased overfitting 
 
 Reason: Widely used CNNs that enable deeper models without degradation; good for benchmarking.
 
-3. ConvNeXt Tiny
+#### ConvNeXt Tiny
 
 Modern CNN inspired by Vision Transformers, combining CNN efficiency with transformer-like design choices.
 
@@ -145,6 +145,11 @@ The F1 Score of ~0.7 mean is pretty decent and on average is correctly identifyi
 
 The ROC-AUC measuring the ability to rank postivie samples higher than negative ones is pretty good. It is very confident in distinguishing classes from the other classes with an ROC-AUC of 0.95. 
 
+<img width="1000" height="600" alt="Loss" src="https://github.com/user-attachments/assets/c997bccd-ed43-4a70-a974-c185f730f576" />
+<img width="1000" height="600" alt="Accuracy" src="https://github.com/user-attachments/assets/95ce32c3-c874-41a9-aecb-413a49e14f18" />
+
+<img width="700" height="500" alt="Confusion Matrix" src="https://github.com/user-attachments/assets/e35cb2d5-ad1b-491e-8f34-5c591e1911b0" />
+
 
 ## Instructions to Run
 1. Clone Repository and navigate to src/
@@ -159,6 +164,7 @@ The ROC-AUC measuring the ability to rank postivie samples higher than negative 
 
 ## Technical Notes / Lessons Learned
 Overfitting remains a major challenge due to the small number of slides relative to the dataset size. This leads to common tropes being learned in a slide and then over fitting on it. ConvNeXt Tiny performed slightly better than ResNet18/50 and performed just as well after adding various ways to reduce overfitting. While the final iteration provided a F1 score of around ___ which is about the same as ResNet18/50, when ran without certain features, ResNet18/50 overfitted more than ConvNeXt Tiny did. Experimenting with dropout and freezing/unfreezing layers helped reduce the overall overfitting issue, but further data augmentation or regularization may be needed. 
+
 
 
 
