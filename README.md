@@ -93,13 +93,18 @@ We experimented with several convolutional neural network (CNN) architectures to
 
 #### ResNet18 / ResNet50
 - Residual Networks (ResNets) use residual connections H(x)=F(x)+x to allow gradients to flow more easily during training, mitigating the vanishing gradient problem in deep networks.
-- **Architecture:** Stacked residual blocks with convolution, batch normalization, ReLU, pooling, and global average pooling followed by a fully connected layer.
-- **Performance:** Improved over baseline; adding custom layers increased overfitting (train accuracy ~98%, validation F1 ~0.69).
+- Common issue in CNNs is that because there are so many layers, the signal or the improvement from back propogation gets worse leading to the vanishing gradient. ResNet, instead of forcing each layer to learn full transformations, it only learns the difference between the input and the desired output. H(x) is the output, F(x) is what the layer learns and x is the shortcut basically it doesn't need to change much to get through. In medical imaging, this is quite useful because there are often subtle features that deeper networks would be better at, but we don't want the vanishing gradient.
+    
+##### **Architecture:** 
+- Stacked residual blocks with convolution, batch normalization, ReLU, pooling, and global average pooling followed by a fully connected layer.
+##### **Performance:** 
+- Improved over baseline; adding custom layers increased overfitting (train accuracy ~98%, validation F1 ~0.69).
 
 **Reason:** Widely used CNNs that enable deeper models without degradation; good for benchmarking.
 
 #### ConvNeXt Tiny
-Modern CNN inspired by Vision Transformers, combining CNN efficiency with transformer-like design choices.
+- Modern CNN inspired by Vision Transformers, combining CNN efficiency with transformer-like design choices. ConvNeXt utilizes key components of transformers such as layer normalization instead of batch normalization, large patch sizes instead of smaller kernels and simple feed-forward blocks instead of CNN bottle necks, making it scalable. Furthermore instead of bottlenecking, it expands first and then compresses. All of this benefits medical imaging because of the expanding nature, leading to more power and detection of subtle differences and abnormalities. Furthermore, ConvNeXt that is pretrained on sets like ImageNet allow it for fine tuned tasks in medical imaging. 
+
 ##### Architecture:
 - Stem: 4×4 convolution (stride 4) to reduce resolution
 - 4 stages of repeated ConvNeXt blocks with halving feature map size
@@ -156,6 +161,7 @@ This model that we landed on still had overfitting after attempting various tech
 
 ## Technical Notes / Lessons Learned
 Overfitting remains a major challenge due to the small number of slides relative to the dataset size. This leads to common tropes being learned in a slide and then over fitting on it. ConvNeXt Tiny performed slightly better than ResNet18/50 and performed just as well after adding various ways to reduce overfitting. While the final iteration provided a F1 score of around ___ which is about the same as ResNet18/50, when ran without certain features, ResNet18/50 overfitted more than ConvNeXt Tiny did. Experimenting with dropout and freezing/unfreezing layers helped reduce the overall overfitting issue, but further data augmentation or regularization may be needed. 
+
 
 
 
